@@ -10,8 +10,8 @@ services:
     devices:
       - /dev/dri:/dev/dri
     volumes:
-      - "${CONFIG_LOC}/jellyfin:/config"
-      - "${TV_LOC}":/data/tvshows
+      - ${CONFIG_LOC}/jellyfin:/config
+      - ${TV_LOC}:/data/tvshows
       - ${MOVIES_LOC}:/data/movies
     ports:
       - 8096:8096
