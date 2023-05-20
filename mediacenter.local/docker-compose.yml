@@ -98,7 +98,7 @@ services:
     volumes:
       - ${CONFIG_LOC}/qbittorrent:/config
       - ${DOWNLOADS_LOC}:/downloads
-    ports:
+    #ports:
       #- 8080:8080
       #- 6881:6881
       #- 6881:6881/udp
