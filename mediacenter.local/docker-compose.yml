@@ -10,6 +10,8 @@ services:
       - /dev/net/tun:/dev/net/tun
     ports:
       - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
       # - 8888:8888/tcp # HTTP proxy
       # - 8388:8388/tcp # Shadowsocks
       # - 8388:8388/udp # Shadowsocks
@@ -97,9 +99,9 @@ services:
       - ${CONFIG_LOC}/qbittorrent:/config
       - ${DOWNLOADS_LOC}:/downloads
     ports:
-      - 8080:8080
-      - 6881:6881
-      - 6881:6881/udp
+      #- 8080:8080
+      #- 6881:6881
+      #- 6881:6881/udp
     restart: unless-stopped
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
