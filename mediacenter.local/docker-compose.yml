@@ -24,7 +24,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /data/config/prowlarr:/config
+      - ${CONFIG_LOC}/prowlarr:/config
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -36,9 +36,9 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /data/config/sonarr:/config
-      - /data/media/tv:/tv #optional
-      - /data/media/downloads:/downloads #optional
+      - ${CONFIG_LOC}/sonarr:/config
+      - ${TV_LOC}:/tv
+      - ${DOWNLOADS_LOC}:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -51,8 +51,8 @@ services:
       - TZ=Etc/UTC
       - WEBUI_PORT=8080
     volumes:
-      - /data/config/qbittorrent:/config
-      - /data/media/downloads:/downloads
+      - ${CONFIG_LOC}/qbittorrent:/config
+      - ${DOWNLOADS_LOC}:/downloads
     ports:
       - 8080:8080
       - 6881:6881
@@ -66,9 +66,9 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /path/to/bazarr/config:/config
-      - /path/to/movies:/movies #optional
-      - /data/:/tv #optional
+      - ${CONFIG_LOC}/bazarr:/config
+      - ${TV_LOC}:/tv
+      - ${MOVIES_LOC}:/movies
     ports:
       - 6767:6767
     restart: unless-stopped
