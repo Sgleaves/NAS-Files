@@ -1,5 +1,18 @@
 version: "3"
 services:
+  nginx:
+    image: lscr.io/linuxserver/nginx:latest
+    container_name: nginx
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ${CONFIG_LOC}/nginx:/config
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
