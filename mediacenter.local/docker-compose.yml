@@ -114,6 +114,7 @@ services:
       - ${CONFIG_LOC}/bazarr:/config
       - ${TV_LOC}:/tv
       - ${MOVIES_LOC}:/movies
+      - ${DOWNLOADS_LOC}:/downloads #optional
     ports:
       - 6767:6767
     restart: unless-stopped
