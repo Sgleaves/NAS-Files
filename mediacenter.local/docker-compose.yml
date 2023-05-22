@@ -27,6 +27,7 @@ services:
       - VPN_SERVICE_PROVIDER=nordvpn
       - OPENVPN_USER=${OPENVPN_USER}
       - OPENVPN_PASSWORD=${OPENVPN_PASS}
+      - SERVER_REGIONS=${SERVER_REGIONS}
       - TZ=UTC
   qbittorrent:
     network_mode: "service:gluetun" # Use Gluetun network (nordvpn)
