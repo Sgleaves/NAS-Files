@@ -5,8 +5,13 @@
 # 6767 = Bazarr
 # 5055 = Overseerr
 # 8787 = Readarr
+# 8083 = Calibre-Web
+# 443,80 = Nginx
+
 version: "3"
 services:
+
+  # DOWNLOADING
   gluetun:
     image: qmcgaw/gluetun
     container_name: gluetun
@@ -23,61 +28,6 @@ services:
       - OPENVPN_USER=${OPENVPN_USER}
       - OPENVPN_PASSWORD=${OPENVPN_PASS}
       - TZ=UTC
-  nginx:
-    image: lscr.io/linuxserver/nginx:latest
-    container_name: nginx
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - ${CONFIG_LOC}/nginx:/config
-    ports:
-      - 80:80
-      - 443:443
-    restart: unless-stopped
-  jellyfin:
-    image: lscr.io/linuxserver/jellyfin:latest
-    container_name: jellyfin
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    devices:
-      - /dev/dri:/dev/dri
-    volumes:
-      - ${CONFIG_LOC}/jellyfin:/config
-      - ${TV_LOC}:/data/tvshows
-      - ${MOVIES_LOC}:/data/movies
-    ports:
-      - 8096:8096
-    restart: unless-stopped
-  prowlarr:
-    image: lscr.io/linuxserver/prowlarr:latest
-    container_name: prowlarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - ${CONFIG_LOC}/prowlarr:/config
-    ports:
-      - 9696:9696
-    restart: unless-stopped
-  sonarr:
-    image: lscr.io/linuxserver/sonarr:latest
-    container_name: sonarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - ${CONFIG_LOC}/sonarr:/config
-      - ${TV_LOC}:/tv
-      - ${DOWNLOADS_LOC}:/downloads
-    ports:
-      - 8989:8989
-    restart: unless-stopped
   qbittorrent:
     network_mode: "service:gluetun" # Use Gluetun network (nordvpn)
     image: lscr.io/linuxserver/qbittorrent:latest
@@ -96,6 +46,54 @@ services:
       #- 6881:6881
       #- 6881:6881/udp
     restart: unless-stopped
+
+
+  # INDEXING
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ${CONFIG_LOC}/prowlarr:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+  
+
+  # TV AND MOVIES
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    devices:
+      - /dev/dri:/dev/dri
+    volumes:
+      - ${CONFIG_LOC}/jellyfin:/config
+      - ${TV_LOC}:/data/tvshows
+      - ${MOVIES_LOC}:/data/movies
+    ports:
+      - 8096:8096
+    restart: unless-stopped
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ${CONFIG_LOC}/sonarr:/config
+      - ${TV_LOC}:/tv
+      - ${DOWNLOADS_LOC}:/downloads
+    ports:
+      - 8989:8989
+    restart: unless-stopped
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
@@ -107,7 +105,7 @@ services:
       - ${CONFIG_LOC}/bazarr:/config
       - ${TV_LOC}:/tv
       - ${MOVIES_LOC}:/movies
-      - ${DOWNLOADS_LOC}:/downloads #optional
+      - ${DOWNLOADS_LOC}:/downloads
     ports:
       - 6767:6767
     restart: unless-stopped
@@ -120,8 +118,8 @@ services:
       - TZ=Etc/UTC
     volumes:
       - ${CONFIG_LOC}/radarr:/config
-      - ${MOVIES_LOC}:/movies #optional
-      - ${DOWNLOADS_LOC}:/downloads #optional
+      - ${MOVIES_LOC}:/movies
+      - ${DOWNLOADS_LOC}:/downloads
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -137,6 +135,9 @@ services:
     ports:
       - 5055:5055
     restart: unless-stopped
+  
+
+  # READING
   readarr:
     image: lscr.io/linuxserver/readarr:develop
     container_name: readarr
@@ -150,4 +151,35 @@ services:
       - ${DOWNLOADS_LOC}/books:/downloads
     ports:
       - 8787:8787
+    restart: unless-stopped
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web:latest
+    container_name: calibre-web
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
+      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
+    volumes:
+      - ${CONFIG_LOC}/calibre-web:/config
+      - ${BOOKS_LOC}:/books
+    ports:
+      - 8083:8083
+    restart: unless-stopped
+  
+
+  # PROXY
+  nginx:
+    image: lscr.io/linuxserver/nginx:latest
+    container_name: nginx
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ${CONFIG_LOC}/nginx:/config
+    ports:
+      - 80:80
+      - 443:443
     restart: unless-stopped
