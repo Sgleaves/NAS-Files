@@ -3,34 +3,19 @@ services:
   gluetun:
     image: qmcgaw/gluetun
     container_name: gluetun
-    # line above must be uncommented to allow external containers to connect. See https://github.com/qdm12/gluetun/wiki/Connect-a-container-to-gluetun#external-container-to-gluetun
     cap_add:
       - NET_ADMIN
     devices:
       - /dev/net/tun:/dev/net/tun
     ports:
-      - 8080:8080
-      #- 6881:6881
-      #- 6881:6881/udp
-      # - 8888:8888/tcp # HTTP proxy
-      # - 8388:8388/tcp # Shadowsocks
-      # - 8388:8388/udp # Shadowsocks
+      - 8080:8080 # qBittorrent web ui
     volumes:
       - ${CONFIG_LOC}/gluetun:/gluetun
     environment:
-      # See https://github.com/qdm12/gluetun/wiki
       - VPN_SERVICE_PROVIDER=nordvpn
-      # OpenVPN:
       - OPENVPN_USER=${OPENVPN_USER}
       - OPENVPN_PASSWORD=${OPENVPN_PASS}
-      # Wireguard:
-      # - WIREGUARD_PRIVATE_KEY=wOEI9rqqbDwnN8/Bpp22sVz48T71vJ4fYmFWujulwUU=
-      # - WIREGUARD_ADDRESSES=10.64.222.21/32
-      # Timezone for accurate log times
       - TZ=UTC
-      # Server list updater. See https://github.com/qdm12/gluetun/wiki/Updating-Servers#periodic-update
-      - UPDATER_PERIOD=
-      - UPDATER_VPN_SERVICE_PROVIDERS=
   nginx:
     image: lscr.io/linuxserver/nginx:latest
     container_name: nginx
@@ -87,7 +72,7 @@ services:
       - 8989:8989
     restart: unless-stopped
   qbittorrent:
-    network_mode: "service:gluetun"
+    network_mode: "service:gluetun" # Use Gluetun network (nordvpn)
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     environment:
@@ -98,6 +83,7 @@ services:
     volumes:
       - ${CONFIG_LOC}/qbittorrent:/config
       - ${DOWNLOADS_LOC}:/downloads
+    # Commented due to Gluetun proxying ports.
     #ports:
       #- 8080:8080
       #- 6881:6881
@@ -131,4 +117,16 @@ services:
       - ${DOWNLOADS_LOC}:/downloads #optional
     ports:
       - 7878:7878
+    restart: unless-stopped
+  overseerr:
+    image: lscr.io/linuxserver/overseerr:latest
+    container_name: overseerr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ${CONFIG_LOC}/overseerr:/config
+    ports:
+      - 5055:5055
     restart: unless-stopped
