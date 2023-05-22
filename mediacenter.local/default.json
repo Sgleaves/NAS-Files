@@ -1,0 +1,682 @@
+{
+	"schemaVersion": 1,
+	"configProperties": {
+		"name": "default"
+	},
+	"categories": [
+		{
+			"id": "7501a1e0-322e-4d74-a3bc-d0dbd0e12848",
+			"name": "User Apps",
+			"position": 1
+		},
+		{
+			"id": "e89c364e-654b-4e48-9696-4855ac2caeb6",
+			"name": "Admin Apps",
+			"position": 2,
+			"type": "category"
+		}
+	],
+	"wrappers": [
+		{
+			"id": "default",
+			"position": 0
+		},
+		{
+			"id": "f455dca5-4d47-4bbd-a0dc-fbc08b3579b3",
+			"position": 2
+		},
+		{
+			"id": "e6f3e06e-66a4-4fb8-ba73-0dd4c400cd2c",
+			"position": 2
+		}
+	],
+	"apps": [
+		{
+			"id": "43f521d3-44cd-43c2-8efa-9d3eed9ba062",
+			"name": "Bazarr",
+			"url": "http://192.168.1.69:6767",
+			"appearance": {
+				"iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/bazarr.png"
+			},
+			"network": {
+				"enabledStatusChecker": true,
+				"statusCodes": [
+					"200"
+				],
+				"okStatus": [
+					200
+				]
+			},
+			"behaviour": {
+				"isOpeningNewTab": true,
+				"externalUrl": "http://192.168.1.69:6767"
+			},
+			"area": {
+				"type": "category",
+				"properties": {
+					"id": "e89c364e-654b-4e48-9696-4855ac2caeb6"
+				}
+			},
+			"shape": {
+				"lg": {
+					"location": {
+						"x": 3,
+						"y": 0
+					},
+					"size": {
+						"width": 1,
+						"height": 1
+					}
+				}
+			},
+			"integration": {
+				"type": null,
+				"properties": []
+			}
+		},
+		{
+			"id": "b644f49d-8b85-40a4-ac03-c9ebdbc7b557",
+			"name": "Prowlarr",
+			"url": "http://192.168.1.69:9696",
+			"appearance": {
+				"iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/prowlarr.png"
+			},
+			"network": {
+				"enabledStatusChecker": true,
+				"statusCodes": [
+					"200"
+				],
+				"okStatus": [
+					200
+				]
+			},
+			"behaviour": {
+				"isOpeningNewTab": true,
+				"externalUrl": "http://192.168.1.69:9696"
+			},
+			"area": {
+				"type": "category",
+				"properties": {
+					"id": "e89c364e-654b-4e48-9696-4855ac2caeb6"
+				}
+			},
+			"shape": {
+				"lg": {
+					"location": {
+						"x": 4,
+						"y": 0
+					},
+					"size": {
+						"width": 1,
+						"height": 1
+					}
+				}
+			},
+			"integration": {
+				"type": null,
+				"properties": []
+			}
+		},
+		{
+			"id": "e7c32ea1-5fe9-437e-ad10-20089e0e311a",
+			"name": "Calibre",
+			"url": "http://192.168.1.69:8083",
+			"appearance": {
+				"iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/calibre.png"
+			},
+			"network": {
+				"enabledStatusChecker": true,
+				"statusCodes": [
+					"200"
+				],
+				"okStatus": [
+					200
+				]
+			},
+			"behaviour": {
+				"isOpeningNewTab": true,
+				"externalUrl": "http://192.168.1.69:8083"
+			},
+			"area": {
+				"type": "category",
+				"properties": {
+					"id": "e89c364e-654b-4e48-9696-4855ac2caeb6"
+				}
+			},
+			"shape": {
+				"lg": {
+					"location": {
+						"x": 6,
+						"y": 0
+					},
+					"size": {
+						"width": 1,
+						"height": 1
+					}
+				}
+			},
+			"integration": {
+				"type": null,
+				"properties": []
+			}
+		},
+		{
+			"id": "b1b302d1-323d-47dc-b3a3-96b1cad8a5bd",
+			"name": "qBittorrent",
+			"url": "http://192.168.1.69:8080",
+			"appearance": {
+				"iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/qbittorrent.png"
+			},
+			"network": {
+				"enabledStatusChecker": true,
+				"statusCodes": [
+					"200"
+				]
+			},
+			"behaviour": {
+				"isOpeningNewTab": true,
+				"externalUrl": "http://192.168.1.69:8080"
+			},
+			"area": {
+				"type": "category",
+				"properties": {
+					"id": "e89c364e-654b-4e48-9696-4855ac2caeb6"
+				}
+			},
+			"shape": {
+				"lg": {
+					"location": {
+						"x": 0,
+						"y": 0
+					},
+					"size": {
+						"width": 1,
+						"height": 1
+					}
+				}
+			},
+			"integration": {
+				"type": "qBittorrent",
+				"properties": [
+					{
+						"field": "username",
+						"type": "public",
+						"value": "admin",
+						"isDefined": true
+					},
+					{
+						"field": "password",
+						"type": "private",
+						"value": null,
+						"isDefined": true
+					}
+				]
+			}
+		},
+		{
+			"id": "f5bc7912-b0a8-4ec7-9286-a0fbe34aed8f",
+			"name": "Sonarr",
+			"url": "http://192.168.1.69:8989",
+			"appearance": {
+				"iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/sonarr.png"
+			},
+			"network": {
+				"enabledStatusChecker": true,
+				"statusCodes": [
+					"200"
+				],
+				"okStatus": [
+					200
+				]
+			},
+			"behaviour": {
+				"isOpeningNewTab": true,
+				"externalUrl": "http://192.168.1.69:8989"
+			},
+			"area": {
+				"type": "category",
+				"properties": {
+					"id": "e89c364e-654b-4e48-9696-4855ac2caeb6"
+				}
+			},
+			"shape": {
+				"lg": {
+					"location": {
+						"x": 1,
+						"y": 0
+					},
+					"size": {
+						"width": 1,
+						"height": 1
+					}
+				}
+			},
+			"integration": {
+				"type": "sonarr",
+				"properties": [
+					{
+						"type": "private",
+						"field": "apiKey",
+						"value": "c9f5b5a9b0124eed83ef8c33286108de",
+						"isDefined": false
+					}
+				]
+			}
+		},
+		{
+			"id": "ae6946c3-bb2e-4be2-a675-9bc4ce1c5211",
+			"name": "Jellyseerr",
+			"url": "http://192.168.1.69:5055",
+			"appearance": {
+				"iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/jellyseerr.png"
+			},
+			"network": {
+				"enabledStatusChecker": true,
+				"statusCodes": [
+					"200"
+				]
+			},
+			"behaviour": {
+				"isOpeningNewTab": true,
+				"externalUrl": "http://192.168.1.69:5055"
+			},
+			"area": {
+				"type": "category",
+				"properties": {
+					"id": "7501a1e0-322e-4d74-a3bc-d0dbd0e12848"
+				}
+			},
+			"shape": {
+				"lg": {
+					"location": {
+						"x": 0,
+						"y": 0
+					},
+					"size": {
+						"width": 1,
+						"height": 1
+					}
+				}
+			},
+			"integration": {
+				"type": "jellyseerr",
+				"properties": [
+					{
+						"field": "apiKey",
+						"type": "private",
+						"value": null,
+						"isDefined": true
+					}
+				]
+			}
+		},
+		{
+			"id": "bb7173ed-aada-47d1-9cc4-9cf057c87a5a",
+			"name": "Readarr",
+			"url": "http://192.168.1.69:8787",
+			"appearance": {
+				"iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/readarr.png"
+			},
+			"network": {
+				"enabledStatusChecker": true,
+				"statusCodes": [
+					"200"
+				],
+				"okStatus": [
+					200
+				]
+			},
+			"behaviour": {
+				"isOpeningNewTab": true,
+				"externalUrl": "http://192.168.1.69:8787"
+			},
+			"area": {
+				"type": "category",
+				"properties": {
+					"id": "e89c364e-654b-4e48-9696-4855ac2caeb6"
+				}
+			},
+			"shape": {
+				"lg": {
+					"location": {
+						"x": 5,
+						"y": 0
+					},
+					"size": {
+						"width": 1,
+						"height": 1
+					}
+				}
+			},
+			"integration": {
+				"type": "readarr",
+				"properties": [
+					{
+						"type": "private",
+						"field": "apiKey",
+						"value": "91ab5a15156049b0a0c3848be04cdcee",
+						"isDefined": false
+					}
+				]
+			}
+		},
+		{
+			"id": "23135b6b-9d74-475d-aa2b-c443a873131e",
+			"name": "Jellyfin",
+			"url": "http://192.168.1.69:8096",
+			"appearance": {
+				"iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/jellyfin.png"
+			},
+			"network": {
+				"enabledStatusChecker": true,
+				"statusCodes": [
+					"200"
+				]
+			},
+			"behaviour": {
+				"isOpeningNewTab": true,
+				"externalUrl": "http://192.168.1.69:8096"
+			},
+			"area": {
+				"type": "category",
+				"properties": {
+					"id": "7501a1e0-322e-4d74-a3bc-d0dbd0e12848"
+				}
+			},
+			"shape": {
+				"lg": {
+					"location": {
+						"x": 1,
+						"y": 0
+					},
+					"size": {
+						"width": 1,
+						"height": 1
+					}
+				}
+			},
+			"integration": {
+				"type": "jellyfin",
+				"properties": [
+					{
+						"field": "username",
+						"type": "public",
+						"value": "sgleaves",
+						"isDefined": true
+					},
+					{
+						"field": "password",
+						"type": "private",
+						"value": null,
+						"isDefined": true
+					}
+				]
+			}
+		},
+		{
+			"id": "d7c5237f-fcd6-4666-abbf-00a74aa52978",
+			"name": "Radarr",
+			"url": "http://192.168.1.69:7878",
+			"appearance": {
+				"iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/radarr.png"
+			},
+			"network": {
+				"enabledStatusChecker": true,
+				"statusCodes": [
+					"200"
+				],
+				"okStatus": [
+					200
+				]
+			},
+			"behaviour": {
+				"isOpeningNewTab": true,
+				"externalUrl": "http://192.168.1.69:7878"
+			},
+			"area": {
+				"type": "category",
+				"properties": {
+					"id": "e89c364e-654b-4e48-9696-4855ac2caeb6"
+				}
+			},
+			"shape": {
+				"lg": {
+					"location": {
+						"x": 2,
+						"y": 0
+					},
+					"size": {
+						"width": 1,
+						"height": 1
+					}
+				}
+			},
+			"integration": {
+				"type": "radarr",
+				"properties": [
+					{
+						"type": "private",
+						"field": "apiKey",
+						"value": "a3d5d59bbc5644c586d0b52832986071",
+						"isDefined": false
+					}
+				]
+			}
+		}
+	],
+	"widgets": [
+		{
+			"id": "2a57a0fd-06c7-4632-9b13-b0a8843c1553",
+			"type": "media-requests-list",
+			"properties": {
+				"replaceLinksWithExternalHost": true
+			},
+			"area": {
+				"type": "wrapper",
+				"properties": {
+					"id": "e6f3e06e-66a4-4fb8-ba73-0dd4c400cd2c"
+				}
+			},
+			"shape": {
+				"sm": {
+					"location": {
+						"x": 0,
+						"y": 0
+					},
+					"size": {
+						"width": 3,
+						"height": 2
+					}
+				},
+				"md": {
+					"location": {
+						"x": 0,
+						"y": 0
+					},
+					"size": {
+						"width": 3,
+						"height": 2
+					}
+				},
+				"lg": {
+					"location": {
+						"x": 4,
+						"y": 0
+					},
+					"size": {
+						"width": 4,
+						"height": 4
+					}
+				}
+			}
+		},
+		{
+			"id": "82543682-6399-4ede-a344-2e7f15ea94b7",
+			"type": "media-requests-stats",
+			"properties": {},
+			"area": {
+				"type": "wrapper",
+				"properties": {
+					"id": "e6f3e06e-66a4-4fb8-ba73-0dd4c400cd2c"
+				}
+			},
+			"shape": {
+				"sm": {
+					"location": {
+						"x": 0,
+						"y": 0
+					},
+					"size": {
+						"width": 1,
+						"height": 2
+					}
+				},
+				"md": {
+					"location": {
+						"x": 0,
+						"y": 0
+					},
+					"size": {
+						"width": 1,
+						"height": 2
+					}
+				},
+				"lg": {
+					"location": {
+						"x": 3,
+						"y": 0
+					},
+					"size": {
+						"width": 1,
+						"height": 4
+					}
+				}
+			}
+		},
+		{
+			"id": "eddfac9d-ca89-472c-aa5f-29f36214dbd8",
+			"type": "dlspeed",
+			"properties": {},
+			"area": {
+				"type": "wrapper",
+				"properties": {
+					"id": "e6f3e06e-66a4-4fb8-ba73-0dd4c400cd2c"
+				}
+			},
+			"shape": {
+				"sm": {
+					"location": {
+						"x": 0,
+						"y": 0
+					},
+					"size": {
+						"width": 2,
+						"height": 2
+					}
+				},
+				"md": {
+					"location": {
+						"x": 0,
+						"y": 0
+					},
+					"size": {
+						"width": 2,
+						"height": 2
+					}
+				},
+				"lg": {
+					"location": {
+						"x": 0,
+						"y": 0
+					},
+					"size": {
+						"width": 3,
+						"height": 4
+					}
+				}
+			}
+		},
+		{
+			"id": "ce835c3d-8b9f-426d-8e62-f4d5b23ff9f3",
+			"type": "torrents-status",
+			"properties": {
+				"displayCompletedTorrents": true,
+				"displayStaleTorrents": true,
+				"labelFilterIsWhitelist": true,
+				"labelFilter": []
+			},
+			"area": {
+				"type": "wrapper",
+				"properties": {
+					"id": "e6f3e06e-66a4-4fb8-ba73-0dd4c400cd2c"
+				}
+			},
+			"shape": {
+				"sm": {
+					"location": {
+						"x": 0,
+						"y": 0
+					},
+					"size": {
+						"width": 2,
+						"height": 2
+					}
+				},
+				"md": {
+					"location": {
+						"x": 0,
+						"y": 0
+					},
+					"size": {
+						"width": 2,
+						"height": 2
+					}
+				},
+				"lg": {
+					"location": {
+						"x": 8,
+						"y": 0
+					},
+					"size": {
+						"width": 4,
+						"height": 4
+					}
+				}
+			}
+		}
+	],
+	"settings": {
+		"common": {
+			"searchEngine": {
+				"type": "google",
+				"properties": {}
+			}
+		},
+		"customization": {
+			"layout": {
+				"enabledLeftSidebar": false,
+				"enabledRightSidebar": false,
+				"enabledDocker": false,
+				"enabledPing": true,
+				"enabledSearchbar": false
+			},
+			"pageTitle": "Sam's Media Center",
+			"logoImageUrl": "/imgs/logo/logo.png",
+			"faviconUrl": "/imgs/favicon/favicon-squared.png",
+			"backgroundImageUrl": "",
+			"customCss": "",
+			"colors": {
+				"primary": "red",
+				"secondary": "yellow",
+				"shade": 7
+			},
+			"appOpacity": 100,
+			"gridstack": {
+				"columnCountSmall": 3,
+				"columnCountMedium": 6,
+				"columnCountLarge": 12
+			},
+			"metaTitle": "Dashboard for apps"
+		}
+	}
+}
