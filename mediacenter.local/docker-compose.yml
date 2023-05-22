@@ -6,6 +6,7 @@
 # 5055 = Overseerr
 # 8787 = Readarr
 # 8083 = Calibre-Web
+# 7575 = Homarr 
 # 443,80 = Nginx
 
 version: "3"
@@ -170,6 +171,15 @@ services:
   
 
   # PROXY
+  homarr:
+    container_name: homarr
+    image: ghcr.io/ajnart/homarr:latest
+    restart: unless-stopped
+    volumes:
+      - ${CONFIG_LOC}/homarr:/app/data/configs
+      - ${ICONS_LOC}:/app/public/icons
+    ports:
+      - 7575:7575
   nginx:
     image: lscr.io/linuxserver/nginx:latest
     container_name: nginx
