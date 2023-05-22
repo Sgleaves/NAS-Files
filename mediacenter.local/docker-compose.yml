@@ -1,3 +1,10 @@
+# 8080 = qBittorrent (Proxy via Gluetun)
+# 8096 = Jellyfin
+# 9696 = Prowlerr
+# 8989 = Sonarr
+# 6767 = Bazarr
+# 5055 = Overseerr
+# 8787 = Readarr
 version: "3"
 services:
   gluetun:
