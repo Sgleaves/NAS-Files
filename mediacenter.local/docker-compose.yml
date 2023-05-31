@@ -180,16 +180,11 @@ services:
       - ${ICONS_LOC}:/app/public/icons
     ports:
       - 7575:7575
-  nginx:
-    image: lscr.io/linuxserver/nginx:latest
-    container_name: nginx
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - ${CONFIG_LOC}/nginx:/config
-    ports:
-      - 80:80
-      - 443:443
+  dash:
+    image: mauricenino/dashdot:latest
     restart: unless-stopped
+    privileged: true
+    ports:
+      - '80:3001'
+    volumes:
+      - /:/mnt/host:ro
