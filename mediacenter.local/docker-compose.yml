@@ -187,4 +187,4 @@ services:
     ports:
       - '80:3001'
     volumes:
-      - /:/mnt/host:ro
+      - /data:/mnt/host:ro
