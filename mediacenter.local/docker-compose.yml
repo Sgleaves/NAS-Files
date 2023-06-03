@@ -5,7 +5,7 @@
 # 6767 = Bazarr
 # 5055 = Overseerr
 # 8787 = Readarr
-#  Calibre
+# 9081 = Calibre
 # 7575 = Homarr
 
 version: "3"
