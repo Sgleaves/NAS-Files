@@ -9,8 +9,8 @@ services:
     environment:
       - OPENVPN_PROVIDER=NORDVPN
       - OPENVPN_CONFIG=UK London
-      - OPENVPN_USERNAME=user
-      - OPENVPN_PASSWORD=pass
+      - OPENVPN_USERNAME=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASS}
       - LOCAL_NETWORK=192.168.1.0/24
       - NORDVPN_COUNTRY=GB
     logging:
