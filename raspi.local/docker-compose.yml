@@ -47,3 +47,57 @@ services:
     volumes:
       - ${CONFIG_LOC}/jellyseerr:/app/config
     restart: unless-stopped
+  radarr:
+    image: lscr.io/linuxserver/radarr:arm32v7-latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ${CONFIG_LOC}/radarr:/config
+      - ${MOVIES_LOC}:/movies
+      - ${DOWNLOADS_LOC}:/downloads
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:arm32v7-latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ${CONFIG_LOC}/sonarr:/config
+      - ${TV_LOC}:/tv
+      - ${DOWNLOADS_LOC}:/downloads
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:arm32v7-latest
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ${CONFIG_LOC}/bazarr:/config
+      - ${TV_LOC}:/tv
+      - ${MOVIES_LOC}:/movies
+      - ${DOWNLOADS_LOC}:/downloads
+    ports:
+      - 6767:6767
+    restart: unless-stopped
+
+  # PROXY
+  homarr:
+    container_name: homarr
+    image: ghcr.io/ajnart/homarr:latest
+    restart: unless-stopped
+    volumes:
+      - ${CONFIG_LOC}/homarr:/app/data/configs
+      - ${ICONS_LOC}:/app/public/icons
+    ports:
+      - 7575:7575
