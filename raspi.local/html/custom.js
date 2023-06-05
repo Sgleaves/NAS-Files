@@ -8,10 +8,10 @@ jQuery(document).ready(function(){
         {name:"Jellyfin", port:8096},
         {name:"Transmission", port:9091}
     ];
-    var url = window.location;
+    var url = window.location.host;
     
     apps.forEach(element => {
-        var btn = '<a href="'+url+':'+element.port+'"><button type="button" class="btn btn-dark m-2">'+element.name+'</button></a>';
+        var btn = '<a href="http://'+url+':'+element.port+'"><button type="button" class="btn btn-dark m-2">'+element.name+'</button></a>';
         jQuery('#container').append(btn);
     });
 });
