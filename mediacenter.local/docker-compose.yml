@@ -5,9 +5,8 @@
 # 6767 = Bazarr
 # 5055 = Overseerr
 # 8787 = Readarr
-# 8083 = Calibre-Web
-# 7575 = Homarr 
-# 443,80 = Nginx
+# 9081 = Calibre
+# 7575 = Homarr
 
 version: "3"
 services:
@@ -149,26 +148,26 @@ services:
     volumes:
       - ${CONFIG_LOC}/readarr:/config
       - ${BOOKS_LOC}:/books
-      - ${DOWNLOADS_LOC}/books:/downloads
+      - ${DOWNLOADS_LOC}:/downloads
     ports:
       - 8787:8787
     restart: unless-stopped
-  calibre-web:
-    image: lscr.io/linuxserver/calibre-web:latest
-    container_name: calibre-web
+  calibre:
+    image: lscr.io/linuxserver/calibre:latest
+    container_name: calibre
+    security_opt:
+      - seccomp:unconfined #optional
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
-      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
     volumes:
-      - ${CONFIG_LOC}/calibre-web:/config
-      - ${BOOKS_LOC}:/books
+      - ${CONFIG_LOC}/calibre:/config
     ports:
-      - 8083:8083
+      - 9080:8080
+      - 9181:8181
+      - 9081:8081
     restart: unless-stopped
-  
 
   # PROXY
   homarr:
@@ -180,11 +179,3 @@ services:
       - ${ICONS_LOC}:/app/public/icons
     ports:
       - 7575:7575
-  dash:
-    image: mauricenino/dashdot:latest
-    restart: unless-stopped
-    privileged: true
-    ports:
-      - '80:3001'
-    volumes:
-      - /data:/mnt/host:ro
