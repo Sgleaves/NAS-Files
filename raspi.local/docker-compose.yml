@@ -27,8 +27,8 @@ services:
     network_mode: 'host'
     volumes:
       - ${CONFIG_LOC}/jellyfin:/config
-      - ${TV_LOC}:/data/tvshows:ro
-      - ${MOVIES_LOC}:/data/movies:ro
+      - ${TV_LOC}:/tv
+      - ${MOVIES_LOC}:/movies
     restart: 'unless-stopped'
     # Optional - alternative address used for autodiscovery
     #environment:
@@ -36,3 +36,14 @@ services:
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     extra_hosts:
       - "host.docker.internal:host-gateway"
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    environment:
+      - LOG_LEVEL=info
+      - TZ=Etc/UTC
+    ports:
+      - 5055:5055
+    volumes:
+      - ${CONFIG_LOC}/jellyseerr:/app/config
+    restart: unless-stopped
