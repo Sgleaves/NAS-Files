@@ -104,15 +104,3 @@ services:
     ports:
       - 9696:9696
     restart: unless-stopped
-
-
-  # PROXY
-  homarr:
-    container_name: homarr
-    image: ghcr.io/ajnart/homarr:latest
-    restart: unless-stopped
-    volumes:
-      - ${CONFIG_LOC}/homarr:/app/data/configs
-      - ${ICONS_LOC}:/app/public/icons
-    ports:
-      - 7575:7575
