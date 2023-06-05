@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
     var url = window.location.host;
     
     apps.forEach(element => {
-        var btn = '<a href="http://'+url+':'+element.port+'"><button type="button" class="btn btn-dark m-2">'+element.name+'</button></a>';
+        var btn = '<a target="_blank" href="http://'+url+':'+element.port+'"><button type="button" class="btn btn-dark m-2">'+element.name+'</button></a>';
         jQuery('#container').append(btn);
     });
 });
