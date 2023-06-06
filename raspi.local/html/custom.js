@@ -27,9 +27,9 @@ jQuery(document).ready(function () {
     jQuery('#container').append(btn);
   });
 
-  $('.nav-item').each(function (anchor) {
-    var link = $(anchor).attr('data-href');
-    $(anchor).on('click', function () {
+  $('.nav-item').each(function () {
+    var link = $(this).attr('data-href');
+    $(this).on('click', function () {
       $('iframe').attr('src', link);
     });
   });
