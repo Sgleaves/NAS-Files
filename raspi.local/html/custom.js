@@ -1,29 +1,41 @@
 jQuery(document).ready(function () {
   var apps = [
-    { name: 'Prowlarr', port: 9696 },
-    { name: 'Sonarr', port: 8989 },
-    { name: 'Bazarr', port: 6767 },
-    { name: 'Radarr', port: 7878 },
-    { name: 'Jellyseerr', port: 5055 },
-    { name: 'Jellyfin', port: 8096 },
-    { name: 'Transmission', port: 9091 },
-    { name: 'QNAP', port: 8080, ip: '192.168.1.8' },
+    { name: 'Prowlarr', port: 9696, img: 'img/prowlarr.png' },
+    { name: 'Sonarr', port: 8989, img: 'img/sonarr.svg' },
+    { name: 'Bazarr', port: 6767, img: 'img/bazarr.png' },
+    { name: 'Radarr', port: 7878, img: 'img/radarr.png' },
+    { name: 'Jellyseerr', port: 5055, img: 'img/jellyseerr.png' },
+    { name: 'Jellyfin', port: 8096, img: 'img/jellyfin.svg' },
+    { name: 'Transmission', port: 9091, img: 'img/transmission.png' },
+    { name: 'QNAP', port: 8080, ip: '192.168.1.8', img: 'img/qnap.png' },
   ];
   var url = window.location.hostname;
 
   apps.forEach((element) => {
     var host = url;
-    if (element.ip) host = element.ip;
+    var newTab = false;
+    if (element.ip) {
+      // If ip is not the same as the host then open new tab.
+      host = element.ip;
+      newTab = true;
+    }
+
     var btn =
-      '<li class="nav-item"><a id="' +
+      '<li class="nav-item">' +
+      '<a id="' +
       element.name +
-      '" class="nav-link" target="_blank" data-src="http://' +
+      '" class="nav-link" data-src="http://' +
       host +
       ':' +
       element.port +
       '">' +
+      '<img style="height:3em;width:3em;" src="' +
+      element.img +
+      '" alt="' +
       element.name +
-      '</a></li>';
+      '"/>';
+    '</a>' + '</li>';
+
     jQuery('#container').append(btn);
   });
 
@@ -32,7 +44,16 @@ jQuery(document).ready(function () {
   anchors.forEach(function (el) {
     var link = el.dataset.src;
     el.addEventListener('click', function () {
+      removeActiveLinks();
       iframe.setAttribute('src', link);
+      el.classList.add('active');
     });
   });
+
+  function removeActiveLinks() {
+    var allLinks = document.querySelectorAll('.nav-link');
+    allLinks.forEach(function (i) {
+      i.classList.remove('active');
+    });
+  }
 });
