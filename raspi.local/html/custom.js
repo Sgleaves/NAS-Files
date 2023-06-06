@@ -49,7 +49,7 @@ jQuery(document).ready(function () {
   var iframe = document.getElementsByTagName('iframe')[0];
   anchors.forEach(function (el) {
     var link = el.dataset.src;
-    if (el.dataset.newtab) return;
+    if (el.dataset.newtab === true) return;
     el.addEventListener('click', function () {
       removeActiveLinks();
       iframe.setAttribute('src', link);
