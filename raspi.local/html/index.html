@@ -22,13 +22,20 @@
     ></script>
   </head>
   <body>
-    <main class="d-flex flex-nowrap vh-100">
-      <div class="d-flex flex-column text-center" style="width: 80px">
-        MyPi
-        <hr />
+    <main
+      class="d-flex flex-nowrap vh-100"
+      style="background: url('./img/chip.jpg') no-repeat center center fixed"
+    >
+      <div
+        class="d-flex flex-column flex-shrink-0 bg-dark"
+        style="width: 150px"
+      >
+        <div class="text-center p-3">MyPi</div>
+        <hr class="" />
         <ul class="nav nav-pills flex-column mb-auto" id="container"></ul>
       </div>
-      <iframe class="d-flex w-100"></iframe>
+      <div class="b-example-divider b-example-vr"></div>
+      <iframe class="d-flex w-100 d-none"></iframe>
     </main>
 
     <script src="./custom.js" type="text/javascript"></script>

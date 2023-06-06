@@ -22,7 +22,7 @@ jQuery(document).ready(function () {
     var srcType = newTab ? 'href' : 'data-src';
 
     var btn =
-      '<li class="nav-item">' +
+      '<li class="nav-item pe-auto" style="cursor:pointer;">' +
       '<a id="' +
       element.name +
       '" class="nav-link" target="_blank" ' +
@@ -35,12 +35,14 @@ jQuery(document).ready(function () {
       newTab +
       '"' +
       '>' +
-      '<img style="height:3em;width:3em;" src="' +
+      '<img class="bi me-2" style="height:1em;width:1em;" src="' +
       element.img +
       '" alt="' +
       element.name +
-      '"/>';
-    '</a>' + '</li>';
+      '"/><span class="text-white">' +
+      element.name +
+      '</span></a>' +
+      '</li>';
 
     jQuery('#container').append(btn);
   });
@@ -49,10 +51,11 @@ jQuery(document).ready(function () {
   var iframe = document.getElementsByTagName('iframe')[0];
   anchors.forEach(function (el) {
     var link = el.dataset.src;
-    if (el.dataset.newtab === true) return;
+    if (el.dataset.newtab === 'true') return;
     el.addEventListener('click', function () {
       removeActiveLinks();
       iframe.setAttribute('src', link);
+      iframe.classList.remove('d-none');
       el.classList.add('active');
     });
   });
