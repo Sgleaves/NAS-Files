@@ -27,9 +27,11 @@ jQuery(document).ready(function () {
     jQuery('#container').append(btn);
   });
 
-  // data-href change iframe src
-  $('.nav-link').on('click', function (el) {
-    var link = $(el).attr('data-href');
-    $('iframe').attr('src', link);
+  var anchors = $('.nav-item');
+  $(anchors).each((anchor) => {
+    var link = $(anchor).attr('data-href');
+    anchor.addEventListener('click', function () {
+      $('iframe').attr('src', link);
+    });
   });
 });
