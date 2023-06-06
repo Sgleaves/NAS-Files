@@ -19,16 +19,22 @@ jQuery(document).ready(function () {
       host = element.ip;
       newTab = true;
     }
+    var srcType = newTab ? 'href' : 'data-src';
 
     var btn =
       '<li class="nav-item">' +
       '<a id="' +
       element.name +
-      '" class="nav-link" data-src="http://' +
+      '" class="nav-link" target="_blank" ' +
+      srcType +
+      '="http://' +
       host +
       ':' +
       element.port +
-      '">' +
+      '" data-newtab="' +
+      newTab +
+      '"' +
+      '>' +
       '<img style="height:3em;width:3em;" src="' +
       element.img +
       '" alt="' +
@@ -43,6 +49,7 @@ jQuery(document).ready(function () {
   var iframe = document.getElementsByTagName('iframe')[0];
   anchors.forEach(function (el) {
     var link = el.dataset.src;
+    if (el.dataset.newtab) return;
     el.addEventListener('click', function () {
       removeActiveLinks();
       iframe.setAttribute('src', link);
