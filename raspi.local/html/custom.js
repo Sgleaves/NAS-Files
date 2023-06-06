@@ -26,4 +26,10 @@ jQuery(document).ready(function () {
       '</a></li>';
     jQuery('#container').append(btn);
   });
+
+  // data-href change iframe src
+  $('.nav-link').click(function (el) {
+    var link = $(el).attr('data-href');
+    $('iframe').attr('src', link);
+  });
 });
