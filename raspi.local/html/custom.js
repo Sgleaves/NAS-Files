@@ -27,10 +27,9 @@ jQuery(document).ready(function () {
     jQuery('#container').append(btn);
   });
 
-  var anchors = $('.nav-item');
-  $(anchors).each((anchor) => {
+  $('.nav-item').each(function (anchor) {
     var link = $(anchor).attr('data-href');
-    anchor.addEventListener('click', function () {
+    $(anchor).on('click', function () {
       $('iframe').attr('src', link);
     });
   });
