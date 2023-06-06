@@ -28,7 +28,7 @@ jQuery(document).ready(function () {
   });
 
   // data-href change iframe src
-  $('.nav-link').click(function (el) {
+  $('.nav-link').on('click', function (el) {
     var link = $(el).attr('data-href');
     $('iframe').attr('src', link);
   });
