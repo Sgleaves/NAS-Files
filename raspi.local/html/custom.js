@@ -17,7 +17,7 @@ jQuery(document).ready(function () {
     var btn =
       '<li class="nav-item"><a id="' +
       element.name +
-      '" class="nav-link" target="_blank" data-href="http://' +
+      '" class="nav-link" target="_blank" data-src="http://' +
       host +
       ':' +
       element.port +
@@ -27,10 +27,12 @@ jQuery(document).ready(function () {
     jQuery('#container').append(btn);
   });
 
-  $('.nav-item').each(function () {
-    var link = $(this).attr('data-href');
-    $(this).on('click', function () {
-      $('iframe').attr('src', link);
+  var anchors = document.querySelectorAll('.nav-link');
+  var iframe = document.getElementsByTagName('iframe')[0];
+  anchors.forEach(function (el) {
+    var link = el.dataset.src;
+    el.addEventListener('click', function () {
+      iframe.setAttribute('src', link);
     });
   });
 });
