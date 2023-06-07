@@ -1,11 +1,62 @@
 version: '3.8'
+volumes:
+  downloads:
+    driver_opts:
+      type: "nfs"
+      o: ${NFS_IP_OPTIONS}
+      device: "${NFS_SHARE_FOLDER}${DOWNLOADS_LOC}"
+  tv:
+    driver_opts:
+      type: "nfs"
+      o: ${NFS_IP_OPTIONS}
+      device: "${NFS_SHARE_FOLDER}${TV_LOC}"
+  movies:
+    driver_opts:
+      type: "nfs"
+      o: ${NFS_IP_OPTIONS}
+      device: "${NFS_SHARE_FOLDER}${MOVIES_LOC}"
+  transmission_config:
+    driver_opts:
+      type: "nfs"
+      o: ${NFS_IP_OPTIONS}
+      device: "${NFS_SHARE_FOLDER}config/transmission"
+  jellyfin_config:
+    driver_opts:
+      type: "nfs"
+      o: ${NFS_IP_OPTIONS}
+      device: "${NFS_SHARE_FOLDER}config/jellyfin"
+  jellyseerr_config:
+    driver_opts:
+      type: "nfs"
+      o: ${NFS_IP_OPTIONS}
+      device: "${NFS_SHARE_FOLDER}config/jellyseerr"
+  radarr_config:
+    driver_opts:
+      type: "nfs"
+      o: ${NFS_IP_OPTIONS}
+      device: "${NFS_SHARE_FOLDER}config/radarr"
+  sonarr_config:
+    driver_opts:
+      type: "nfs"
+      o: ${NFS_IP_OPTIONS}
+      device: "${NFS_SHARE_FOLDER}config/sonarr"
+  bazarr_config:
+    driver_opts:
+      type: "nfs"
+      o: ${NFS_IP_OPTIONS}
+      device: "${NFS_SHARE_FOLDER}config/bazarr"
+  prowlarr_config:
+    driver_opts:
+      type: "nfs"
+      o: ${NFS_IP_OPTIONS}
+      device: "${NFS_SHARE_FOLDER}config/prowlarr"
 services:
   transmission-openvpn:
     cap_add:
       - NET_ADMIN
     volumes:
-      - ${DOWNLOADS_LOC}:/data
-      - ${CONFIG_LOC}/transmission:/config'
+      - downloads:/data
+      - transmission_config:/config
     environment:
       - OPENVPN_PROVIDER=NORDVPN
       - OPENVPN_CONFIG=UK London
@@ -26,9 +77,9 @@ services:
     user: 1000:1000
     network_mode: 'host'
     volumes:
-      - ${CONFIG_LOC}/jellyfin:/config
-      - ${TV_LOC}:/tv
-      - ${MOVIES_LOC}:/movies
+      - jellyfin_config:/config
+      - tv:/tv
+      - movies:/movies
     restart: 'unless-stopped'
     # Optional - alternative address used for autodiscovery
     #environment:
@@ -45,7 +96,7 @@ services:
     ports:
       - 5055:5055
     volumes:
-      - ${CONFIG_LOC}/jellyseerr:/app/config
+      - jellyseerr_config:/app/config
     restart: unless-stopped
   radarr:
     image: linuxserver/radarr:arm32v7-4.5.2
@@ -55,9 +106,9 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - ${CONFIG_LOC}/radarr:/config
-      - ${MOVIES_LOC}:/movies
-      - ${DOWNLOADS_LOC}:/downloads
+      - radarr_config:/config
+      - movies:/movies
+      - downloads:/downloads
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -69,9 +120,9 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - ${CONFIG_LOC}/sonarr:/config
-      - ${TV_LOC}:/tv
-      - ${DOWNLOADS_LOC}:/downloads
+      - sonarr_config:/config
+      - tv:/tv
+      - downloads:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -83,10 +134,10 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - ${CONFIG_LOC}/bazarr:/config
-      - ${TV_LOC}:/tv
-      - ${MOVIES_LOC}:/movies
-      - ${DOWNLOADS_LOC}:/downloads
+      - bazarr_config:/config
+      - tv:/tv
+      - movies:/movies
+      - downloads:/downloads
     ports:
       - 6767:6767
     restart: unless-stopped
@@ -100,7 +151,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - ${CONFIG_LOC}/prowlarr:/config
+      - prowlarr_config:/config
     ports:
       - 9696:9696
     restart: unless-stopped
