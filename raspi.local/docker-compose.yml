@@ -61,7 +61,7 @@ services:
     ports:
       - 5055:5055
     volumes:
-      - jellyseerr_config:/app/config
+      - /data/jellyseerr:/app/config
     restart: unless-stopped
   radarr:
     image: linuxserver/radarr:arm32v7-4.5.2
