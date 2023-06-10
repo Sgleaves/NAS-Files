@@ -1,0 +1,23 @@
+version: '3.8'
+volumes:
+  gitlab-config:
+    driver_opts:
+      type: "nfs"
+      o: ${NFS_IP_OPTIONS}
+      device: "${NFS_CONFIG_FOLDER}gitlab"
+  gitlab-data:
+    driver_opts:
+      type: "nfs"
+      o: ${NFS_IP_OPTIONS}
+      device: "${NFS_DATA_FOLDER}gitlab"
+services:
+  gitlab:
+    restart: always
+    hostname: 'gitlab.gleaves.studio'
+    image: 'gitlab/gitlab-ce:latest'
+    ports:
+      - '8283:80'
+    volumes:
+      - gitlab-config:/etc/gitlab
+      - gitlab-data:/var/opt/gitlab
+    shm_size: '256m'
