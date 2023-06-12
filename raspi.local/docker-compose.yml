@@ -125,4 +125,6 @@ services:
   nginx:
     image: nginx:latest
     volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./html:/usr/share/nginx/html
+    ports: -80:80 -443:443
