@@ -120,3 +120,9 @@ services:
     ports:
       - 9696:9696
     restart: unless-stopped
+
+  # PROXY
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./html:/usr/share/nginx/html
