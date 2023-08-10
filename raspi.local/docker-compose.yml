@@ -64,7 +64,7 @@ services:
       - /data/jellyseerr:/app/config
     restart: unless-stopped
   radarr:
-    image: linuxserver/radarr:arm32v7-4.5.2
+    image: linuxserver/radarr:latest
     container_name: radarr
     environment:
       - PUID=1000
@@ -78,7 +78,7 @@ services:
       - 7878:7878
     restart: unless-stopped
   sonarr:
-    image: linuxserver/sonarr:arm32v7-3.0.9
+    image: linuxserver/sonarr:latest
     container_name: sonarr
     environment:
       - PUID=1000
@@ -92,7 +92,7 @@ services:
       - 8989:8989
     restart: unless-stopped
   bazarr:
-    image: linuxserver/bazarr:arm32v7-1.2.1
+    image: linuxserver/bazarr:latest
     container_name: bazarr
     environment:
       - PUID=1000
