@@ -1,0 +1,132 @@
+version: '3.8'
+volumes:
+  downloads:
+   driver_opts:
+      type: none
+      o: bind
+      device: /mnt/md0/media/downloads
+  tv:
+    driver_opts:
+      type: none
+      o: bind
+      device: /mnt/md0/media/tv
+  movies:
+    driver_opts:
+      type: none
+      o: bind
+      device: /mnt/md0/media/movies
+services:
+  transmission-openvpn:
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - downloads:/data
+      - /data/transmission:/config
+    environment:
+      - OPENVPN_PROVIDER=NORDVPN
+      - OPENVPN_CONFIG=UK London
+      - OPENVPN_USERNAME=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASS}
+      - LOCAL_NETWORK=192.168.1.0/24
+      - NORDVPN_COUNTRY=GB
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+    ports:
+      - '9091:9091'
+    image: haugene/transmission-openvpn
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    user: 1000:1000
+    network_mode: 'host'
+    volumes:
+      - /data/jellyfin:/config
+      - tv:/tv
+      - movies:/movies
+    restart: 'unless-stopped'
+    # Optional - alternative address used for autodiscovery
+    #environment:
+    #  - JELLYFIN_PublishedServerUrl=http://rasbpi.local
+    # Optional - may be necessary for docker healthcheck to pass if running in host network mode
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    environment:
+      - LOG_LEVEL=info
+      - TZ=Etc/UTC
+    ports:
+      - 5055:5055
+    volumes:
+      - /data/jellyseerr:/app/config
+    restart: unless-stopped
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /data/radarr:/config
+      - movies:/movies
+      - downloads:/downloads
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /data/sonarr:/config
+      - tv:/tv
+      - downloads:/downloads
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+  bazarr:
+    image: linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /data/bazarr:/config
+      - tv:/tv
+      - movies:/movies
+      - downloads:/downloads
+    ports:
+      - 6767:6767
+    restart: unless-stopped
+
+  # INDEXING
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /data/prowlarr:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+
+  # PROXY
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./html:/usr/share/nginx/html
+    ports:
+      - 80:80
+      - 443:443
