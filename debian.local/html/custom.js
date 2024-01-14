@@ -1,13 +1,14 @@
 jQuery(document).ready(function () {
   var apps = [
     { name: 'Prowlarr', port: 9696, img: 'img/prowlarr.png' },
-    { name: 'Sonarr', port: 8989, img: 'img/sonarr.svg' },
+    { name: 'Sonarr', port: 8989, img: 'img/sonarr.png' },
     { name: 'Bazarr', port: 6767, img: 'img/bazarr.png' },
     { name: 'Radarr', port: 7878, img: 'img/radarr.png' },
+    {name: 'Readarr', port: 8787, img:'img/readarr.png'},
+    {name: 'Calibre', port: 8083, img:'img/calibre-web.png'},
     { name: 'Jellyseerr', port: 5055, img: 'img/jellyseerr.png' },
-    { name: 'Jellyfin', port: 8096, img: 'img/jellyfin.svg' },
-    { name: 'Transmission', port: 9091, img: 'img/transmission.png' },
-    { name: 'QNAP', port: 8080, ip: '192.168.1.8', img: 'img/qnap.png' },
+    { name: 'Jellyfin', port: 8096, img: 'img/jellyfin.png' },
+    { name: 'Transmission', port: 9091, img: 'img/transmission.png' }
   ];
   var url = window.location.hostname;
 
@@ -39,9 +40,7 @@ jQuery(document).ready(function () {
       element.img +
       '" alt="' +
       element.name +
-      '"/><span class="text-white">' +
-      element.name +
-      '</span></a>' +
+      '"/>' +
       '</li>';
 
     jQuery('#container').append(btn);
