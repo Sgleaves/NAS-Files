@@ -165,6 +165,7 @@ services:
       - 9696:9696
     restart: unless-stopped
 
+# https://trash-guides.info/Prowlarr/prowlarr-setup-flaresolverr/
   flaresolverr:
     # DockerHub mirror flaresolverr/flaresolverr:latest
     image: ghcr.io/flaresolverr/flaresolverr:latest
