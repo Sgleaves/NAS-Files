@@ -21,6 +21,7 @@ volumes:
       o: bind
       device: /nvme/media/movies
 services:
+  # TORRENT DOWNLOADER
   transmission-openvpn:
     cap_add:
       - NET_ADMIN
@@ -41,6 +42,8 @@ services:
     ports:
       - '9091:9091'
     image: haugene/transmission-openvpn
+  
+  # MEDIA PLAYER
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
@@ -63,6 +66,8 @@ services:
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     extra_hosts:
       - "host.docker.internal:host-gateway"
+  
+  # REQUESTER
   jellyseerr:
     image: fallenbagel/jellyseerr:latest
     container_name: jellyseerr
@@ -74,6 +79,8 @@ services:
     volumes:
       - /data/jellyseerr2:/app/config
     restart: unless-stopped
+
+  # MOVIES
   radarr:
     image: linuxserver/radarr:latest
     container_name: radarr
@@ -88,6 +95,8 @@ services:
     ports:
       - 7878:7878
     restart: unless-stopped
+  
+  # TV SHOWS
   sonarr:
     image: linuxserver/sonarr:latest
     container_name: sonarr
@@ -117,39 +126,6 @@ services:
     ports:
       - 6767:6767
     restart: unless-stopped
-  readarr:
-    container_name: readarr
-    image: ghcr.io/hotio/readarr
-    ports:
-      - "8787:8787"
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - UMASK=002
-      - TZ=Etc/UTC
-    volumes:
-      - /data/readarr:/config
-      - books:/books
-      - downloads:/downloads
-
-  calibre-web:
-      image: lscr.io/linuxserver/calibre-web:latest
-      container_name: calibre-web
-      environment:
-        - PUID=1000
-        - PGID=1000
-        - TZ=Etc/UTC
-        - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
-        - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
-      volumes:
-        - /data/calibre-web:/config
-        - books:/books
-        - downloads:/downloads
-      ports:
-        - 8083:8083
-      restart: unless-stopped
-
-
 
   # INDEXING
   prowlarr:
@@ -165,6 +141,7 @@ services:
       - 9696:9696
     restart: unless-stopped
 
+# Cloudflare container for Indexing
 # https://trash-guides.info/Prowlarr/prowlarr-setup-flaresolverr/
   flaresolverr:
     # DockerHub mirror flaresolverr/flaresolverr:latest
@@ -178,6 +155,8 @@ services:
     ports:
       - "${PORT:-8191}:8191"
     restart: unless-stopped
+
+  # Dashboard and Login Service  
   organizr:
     image: organizr/organizr
     container_name: organizr  # Same as the docker run argument
