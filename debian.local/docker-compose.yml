@@ -178,13 +178,15 @@ services:
     ports:
       - "${PORT:-8191}:8191"
     restart: unless-stopped
-
-  # PROXY
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./html:/usr/share/nginx/html
+  organizr:
+    image: organizr/organizr
+    container_name: organizr  # Same as the docker run argument
     ports:
-      - 80:80
-      - 443:443
+      - "80:80"  # Map host port 80 to container port 80
+    volumes:
+      - /data/organizr:/config"  # Persist data volume (replace with your path)
+    environment:
+      - PGID=1000  # Set environment variable with group ID
+      - PUID=1000  # Set environment variable with user ID
+      #- fpm: "false"  # Optional environment variable
+      #- branch: "v2-master"  # Optional environment variable
